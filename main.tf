@@ -45,3 +45,11 @@ resource "aws_iam_role" "main" {
   path               = var.role_path
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 }
+
+
+resource "aws_iam_role_policy" "customPolicy" {
+  for_each = length(var.extra_iam_policies) > 0 ? { for name in var.extra_iam_policies : name.policy_name => name } : {}
+  name     = each.value.policy_name
+  role     = aws_iam_role.main.name
+  policy   = each.value.policy_object
+}

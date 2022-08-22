@@ -39,10 +39,10 @@ variable "preset_permission_level" {
 }
 
 variable "extra_iam_policies" {
-  description = "Optional list of IAM policy JSON objects to attach as inline role policies to the new role. When creating multiple policies, the policy name must not overlap."
+  description = "Optional list of IAM policy JSON encoded strings to attach as inline role policies to the new role. When creating multiple policies, the policy name must not overlap."
   type = list(object({
     policy_name   = string
-    policy_object = map(any)
+    policy_object = string
   }))
   default = []
 }
