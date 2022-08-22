@@ -1,0 +1,12 @@
+repos:
+# Run terraform fmt to fix our terraform styling
+# Run terraform docs to generate documentation for our terraform code
+# Run tflint to lint our terraform code
+# Run tfsec to scan our terraform code for security problems
+- repo: git://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.62.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+  hooks:
+    - id: terraform_fmt
+    - id: terraform_docs
+    - id: terraform_tflint
+    - id: terraform_tfsec
