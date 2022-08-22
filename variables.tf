@@ -1,6 +1,7 @@
 variable "role_name" {
-  description = "The name of the IAM role to create. Required."
+  description = "The name of the IAM role to create. If nothing is passed, the default name of 'AWSGithubActionsRunner' is used"
   type        = string
+  default     = "AWSGithubActionsRunner"
 }
 
 variable "role_path" {
@@ -18,6 +19,12 @@ variable "repository_access_type" {
   description = "Level of access to grant the repository. Set to 'branch' to grant access to only one branch or 'all' to grant access to all branches. Defaults to 'all'"
   type        = string
   default     = "all"
+}
+
+variable "repository_access_branch" {
+  description = "The branch name that is allowed to use the IAM role. Required if repository_access_type is set to 'branch'."
+  type        = string
+  default     = ""
 }
 
 variable "github_oidc_provider_arn" {
