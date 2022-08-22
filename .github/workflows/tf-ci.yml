@@ -1,6 +1,8 @@
 on: push
 
 name: Terraform CI
+env:
+  AWS_REGION: us-east-1
 jobs:
   fmt:
     runs-on: ubuntu-latest
