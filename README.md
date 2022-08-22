@@ -9,7 +9,9 @@ The module also supports passing in a custom IAM policy document (typically gene
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.6.0, < 5.0.0 |
 
 ## Providers
 
