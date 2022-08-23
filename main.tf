@@ -21,14 +21,6 @@ data "aws_iam_policy_document" "assume_role_policy" {
     actions = [
       "sts:AssumeRoleWithWebIdentity"
     ]
-    condition {
-      test     = "StringEquals"
-      variable = "token.actions.githubusercontent.com:aud"
-      values = [
-        "sts.amazonaws.com"
-      ]
-    }
-
     dynamic "condition" {
       for_each = var.custom_repository_identifiers != null ? [true] : []
       content {
