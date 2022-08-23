@@ -11,13 +11,13 @@ The module also supports passing in a custom IAM policy document (typically gene
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.6.0, < 5.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0.0, < 5.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.6.0, < 5.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.0.0, < 5.0.0 |
 
 ## Modules
 
