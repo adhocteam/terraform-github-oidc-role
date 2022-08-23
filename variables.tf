@@ -11,8 +11,9 @@ variable "role_path" {
 }
 
 variable "repository_name" {
-  description = "The repository name in the format of <repoorg/reponame> to grant access to the IAM role. For example, for adhoc repos it would be adhocteam/my-amazing-repository. Required."
+  description = "The repository name in the format of <repoorg/reponame> to grant access to the IAM role. For example, for adhoc repos it would be adhocteam/my-amazing-repository. Required if custom_repository_identifiers is not set."
   type        = string
+  default     = ""
 }
 
 variable "repository_access_type" {
@@ -25,6 +26,12 @@ variable "repository_access_branch" {
   description = "The branch name that is allowed to use the IAM role. Required if repository_access_type is set to 'branch'."
   type        = string
   default     = ""
+}
+
+variable "custom_repository_identifiers" {
+  description = "List of custom repository identifiers to attach to the assume role policy instead. For advanced users. This overwrties the repository variables. The list must contain full 'repo:' line instead of the short name. Can accept multiple lines for multiple repositories and/or branch rules."
+  type        = list(string)
+  default     = null
 }
 
 variable "preset_permission_level" {

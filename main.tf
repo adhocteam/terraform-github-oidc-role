@@ -29,12 +29,24 @@ data "aws_iam_policy_document" "assume_role_policy" {
       ]
     }
 
-    condition {
-      test     = "StringEquals"
-      variable = "token.actions.githubusercontent.com:sub"
-      values = [
-        local.gha_assume_role_sub
-      ]
+    dynamic "condition" {
+      for_each = var.custom_repository_identifiers != null ? [true] : []
+      content {
+        test     = "ForAnyValue:StringEquals"
+        variable = "token.actions.githubusercontent.com:sub"
+        values   = var.custom_repository_identifiers
+      }
+    }
+
+    dynamic "condition" {
+      for_each = var.custom_repository_identifiers == null ? [true] : []
+      content {
+        test     = "StringEquals"
+        variable = "token.actions.githubusercontent.com:sub"
+        values = [
+          local.gha_assume_role_sub
+        ]
+      }
     }
   }
 }
