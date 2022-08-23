@@ -7,6 +7,8 @@ resource "aws_iam_role_policy_attachment" "PowerUserAccess" {
 }
 
 data "aws_iam_policy_document" "PowerUserIAMAccess" {
+  # checkov:skip=CKV_AWS_109:This role is needed if using a role that needs limited IAM write access, even if it does allow permission escalation
+  # checkov:skip=CKV_AWS_110:This role is needed if using a role that needs limited IAM write access, even if it does allow permission escalation
   statement {
     effect = "Allow"
     actions = [
