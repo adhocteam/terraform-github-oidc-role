@@ -42,7 +42,6 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_extra_iam_policies"></a> [extra\_iam\_policies](#input\_extra\_iam\_policies) | Optional list of IAM policy JSON encoded strings to attach as inline role policies to the new role. When creating multiple policies, the policy name must not overlap. | <pre>list(object({<br>    policy_name   = string<br>    policy_object = string<br>  }))</pre> | `[]` | no |
-| <a name="input_github_oidc_provider_arn"></a> [github\_oidc\_provider\_arn](#input\_github\_oidc\_provider\_arn) | The ARN for the Github OIDC provider. Required. | `string` | n/a | yes |
 | <a name="input_preset_permission_level"></a> [preset\_permission\_level](#input\_preset\_permission\_level) | Preset permission level to attach to the IAM role. Can be either 'FullAdministrator', 'PowerUserWithIAM', 'PowerUser', or 'None'. Defaults to 'None' | `string` | `"None"` | no |
 | <a name="input_repository_access_branch"></a> [repository\_access\_branch](#input\_repository\_access\_branch) | The branch name that is allowed to use the IAM role. Required if repository\_access\_type is set to 'branch'. | `string` | `""` | no |
 | <a name="input_repository_access_type"></a> [repository\_access\_type](#input\_repository\_access\_type) | Level of access to grant the repository. Set to 'branch' to grant access to only one branch or 'all' to grant access to all branches. Defaults to 'all' | `string` | `"all"` | no |

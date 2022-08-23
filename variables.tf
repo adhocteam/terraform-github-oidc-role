@@ -27,11 +27,6 @@ variable "repository_access_branch" {
   default     = ""
 }
 
-variable "github_oidc_provider_arn" {
-  description = "The ARN for the Github OIDC provider. Required."
-  type        = string
-}
-
 variable "preset_permission_level" {
   description = "Preset permission level to attach to the IAM role. Can be either 'FullAdministrator', 'PowerUserWithIAM', 'PowerUser', or 'None'. Defaults to 'None'"
   type        = string
