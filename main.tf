@@ -15,8 +15,8 @@ data "aws_iam_policy_document" "assume_role_policy" {
   statement {
     effect = "Allow"
     principals {
-      type   = "Federated"
-      values = [data.aws_iam_openid_connect_provider.main.arn]
+      type        = "Federated"
+      identifiers = [data.aws_iam_openid_connect_provider.main.arn]
     }
     actions = [
       "sts:AssumeRoleWithWebIdentity"
