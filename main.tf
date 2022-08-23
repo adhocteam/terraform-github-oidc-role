@@ -21,10 +21,18 @@ data "aws_iam_policy_document" "assume_role_policy" {
     actions = [
       "sts:AssumeRoleWithWebIdentity"
     ]
+    condition {
+      test     = "StringEquals"
+      variable = "token.actions.githubusercontent.com:aud"
+      values = [
+        "sts.amazonaws.com"
+      ]
+    }
+
     dynamic "condition" {
       for_each = var.custom_repository_identifiers != null ? [true] : []
       content {
-        test     = "ForAnyValue:StringEquals"
+        test     = "ForAnyValue:StringLike"
         variable = "token.actions.githubusercontent.com:sub"
         values   = var.custom_repository_identifiers
       }
@@ -33,7 +41,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
     dynamic "condition" {
       for_each = var.custom_repository_identifiers == null ? [true] : []
       content {
-        test     = "StringEquals"
+        test     = "StringLike"
         variable = "token.actions.githubusercontent.com:sub"
         values = [
           local.gha_assume_role_sub
