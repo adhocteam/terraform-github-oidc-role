@@ -110,4 +110,4 @@ jobs:
 
       - name: Validate Terraform code
         shell: bash --noprofile --norc -exo pipefail {0}
-        run: terraform validate
+        run: terraform init && terraform validate
