@@ -65,3 +65,10 @@ resource "aws_iam_role_policy" "customPolicy" {
   role     = aws_iam_role.main.name
   policy   = each.value.policy_object
 }
+
+
+resource "aws_iam_role_policy_attachment" "customPolicyAttachment" {
+  for_each   = length(var.extra_iam_policy_attachments) > 0 ? toset(var.extra_iam_policy_attachments) : []
+  role       = aws_iam_role.main.name
+  policy_arn = each.value
+}

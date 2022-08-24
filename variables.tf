@@ -49,3 +49,9 @@ variable "extra_iam_policies" {
   default = []
 }
 
+variable "extra_iam_policy_attachments" {
+  description = "Optional list of IAM policy ARNs to attach to the role."
+  type        = list(string)
+  default     = []
+}
+
