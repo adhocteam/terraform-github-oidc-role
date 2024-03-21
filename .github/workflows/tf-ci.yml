@@ -29,8 +29,8 @@ jobs:
       - name: Import CI .env file
         uses: cardinalby/export-env-action@v1
         with:
-          envFile: '.github/ci-versions.env'    
-          expand: 'true'
+          envFile: ".github/ci-versions.env"
+          expand: "true"
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
@@ -56,8 +56,8 @@ jobs:
       - name: Import CI .env file
         uses: cardinalby/export-env-action@v1
         with:
-          envFile: '.github/ci-versions.env'    
-          expand: 'true'
+          envFile: ".github/ci-versions.env"
+          expand: "true"
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
@@ -65,30 +65,21 @@ jobs:
           terraform_wrapper: false
           terraform_version: ${{ env.TERRAFORM_VERSION }}
 
-      - name: Setup tfsec
-        run: |
-          wget https://github.com/aquasecurity/tfsec/releases/download/${{ env.TFSEC_VERSION }}/tfsec-linux-amd64
-          chmod +x tfsec-linux-amd64
-          sudo mv tfsec-linux-amd64 /usr/local/bin/tfsec
-
-      - name: Run tfsec
-        shell: bash --noprofile --norc -exo pipefail {0}
-        run: tfsec .
-
-  checkov:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: checkov
-        id: checkov
-        uses: bridgecrewio/checkov-action@c9e3e20671a02850d20e1b1dae97e34b39ff9b37
+      - name: Run Trivy vulnerability scanner in IaC mode
+        uses: aquasecurity/trivy-action@master
         with:
-          quiet: true
-          framework: terraform
-          output_format: github_failed_only # optional: the output format, one of: cli, json, junitxml, github_failed_only
-          download_external_modules: true
+          scan-type: "config"
+          hide-progress: false
+          format: "sarif"
+          output: "trivy-results.sarif"
+          exit-code: "1"
+          ignore-unfixed: true
+          severity: "CRITICAL,HIGH"
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: "trivy-results.sarif"
 
   validate:
     runs-on: ubuntu-latest
@@ -99,8 +90,8 @@ jobs:
       - name: Import CI .env file
         uses: cardinalby/export-env-action@v1
         with:
-          envFile: '.github/ci-versions.env'    
-          expand: 'true'
+          envFile: ".github/ci-versions.env"
+          expand: "true"
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
