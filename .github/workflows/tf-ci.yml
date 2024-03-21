@@ -46,7 +46,7 @@ jobs:
           sudo mv tflint /usr/local/bin/tflint
 
       - name: Run tflint
-        run: tflint .
+        run: tflint --recursive
 
   tfsec:
     runs-on: ubuntu-latest
