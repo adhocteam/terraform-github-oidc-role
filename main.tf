@@ -48,6 +48,15 @@ data "aws_iam_policy_document" "assume_role_policy" {
         ]
       }
     }
+
+    dynamic "condition" {
+      for_each = var.permitted_workflow_refs == null ? [] : [true]
+      content {
+        test     = "ForAnyValue:StringLike"
+        variable = "token.actions.githubusercontent:workflow_ref"
+        values   = var.permitted_workflow_refs
+      }
+    }
   }
 }
 

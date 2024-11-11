@@ -34,6 +34,12 @@ variable "custom_repository_identifiers" {
   default     = null
 }
 
+variable "permitted_workflow_refs" {
+  description = "List of workflow_ref values allowed to assume the role."
+  type        = list(string)
+  default     = null
+}
+
 variable "preset_permission_level" {
   description = "Preset permission level to attach to the IAM role. Can be either 'FullAdministrator', 'PowerUserWithIAM', 'PowerUser', or 'None'. Defaults to 'None'"
   type        = string
